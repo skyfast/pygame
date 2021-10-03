@@ -53,6 +53,12 @@ while running:
 
     # update player
     playerX += player_x_change
+    # bounds checking
+    if playerX < 0:
+        playerX = 0
+    # 800 - 64 = 763
+    if playerX > 736:
+        playerX = 736
     # set screen
     screen.fill((0, 0, 0))
 
