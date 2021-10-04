@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # initialize pygame
 pygame.init()
@@ -22,10 +23,23 @@ player_x_change = 0
 # this is used so the controls are smother
 last_key_down = 'none'
 
+
+#  Enemy and starting cord
+EnemyImg = pygame.image.load('trash.png')
+EnemyX = random.randint(0, 800)
+EnemyY = 50
+
+enemy_x_change = 0.1
+enemy_y_change = 20
+
+
 # draw the player
 def Player(x, y):
     screen.blit(PlayerImg, (x, y))
 
+
+def enemy(x, y):
+    screen.blit(EnemyImg, (x, y))
 
 # game loop
 running = True
@@ -60,7 +74,19 @@ while running:
     if playerX > 736:
         playerX = 736
     # set screen
+
+    EnemyX += enemy_x_change
+
+    if EnemyX < 0:
+        EnemyX = 0
+        enemy_x_change = 0.1
+        EnemyY += enemy_y_change
+    if EnemyX > 736:
+        EnemyX = 736
+        enemy_x_change = -0.1
+        EnemyY += enemy_y_change
     screen.fill((0, 0, 0))
 
     Player(playerX, playerY)
+    enemy(EnemyX, EnemyY)
     pygame.display.update()
