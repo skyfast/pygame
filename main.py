@@ -24,7 +24,6 @@ player_x_change = 0
 # this is used so the controls are smother
 last_key_down = 'none'
 
-
 #  Enemy and starting cord
 EnemyImg = pygame.image.load('trash.png')
 EnemyX = random.randint(0, 800)
@@ -35,6 +34,21 @@ background = pygame.image.load('background.png')
 
 enemy_x_change = 400
 enemy_y_change = 20
+
+# bullet
+bulletImg = pygame.image.load('bullet.png')
+bullet_x = 0
+bullet_y = 480
+bullet_change = 500
+bullet_state = "ready"
+
+
+def fire_bullet(x, y):
+    global bullet_state
+    global bullet_x
+    bullet_state = "fire"
+    bullet_x = x
+    screen.blit(bulletImg, (x + 16, y + 10))
 
 
 # draw the player
@@ -74,9 +88,11 @@ while running:
             if event.key == pygame.K_RIGHT:
                 player_x_change = 400
                 last_key_down = 'right'
+            if event.key == pygame.K_SPACE:
+                fire_bullet(playerX, playerY)
 
     # update player
-    playerX += player_x_change*dt
+    playerX += player_x_change * dt
     # bounds checking
     if playerX < 0:
         playerX = 0
@@ -85,7 +101,7 @@ while running:
         playerX = 736
     # set screen
 
-    EnemyX += enemy_x_change*dt
+    EnemyX += enemy_x_change * dt
 
     if EnemyX < 0:
         EnemyX = 0
@@ -95,9 +111,13 @@ while running:
         EnemyX = 736
         enemy_x_change = -400
         EnemyY += enemy_y_change
+
     screen.fill((0, 0, 0))
     # Background
     screen.blit(background, (0, 0))
     Player(playerX, playerY)
     enemy(EnemyX, EnemyY)
+    if bullet_state == "fire":
+        bullet_y = bullet_y - (bullet_change * dt)
+        fire_bullet(bullet_x, bullet_y)
     pygame.display.update()
