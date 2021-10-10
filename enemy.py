@@ -30,6 +30,7 @@ class Enemy:
             self.going_right = False
             self.y_cord += self.enemy_y_change
 
+
     # draws the enemy on the screen, pass in the screen
     def draw(self, screen):
         screen.blit(self.EnemyImg, (self.x_cord, self.y_cord))
