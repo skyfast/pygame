@@ -32,13 +32,6 @@ score = 0
 e = enemy.Enemy(random.randint(0, 735), 50)
 p = player.Player()
 
-def is_collision(enemyX, enemyY, bulletX, bulletY):
-    distance = math.sqrt(math.pow(enemyX - bulletX, 2) + math.pow(enemyY - bulletY, 2))
-    if distance < 27:
-        return True
-    else:
-        return False
-
 
 dt = 0
 prev_time = time.time()
@@ -73,14 +66,13 @@ while running:
     screen.fill((0, 0, 0))
     # Background
     screen.blit(background, (0, 0))
-    p.draw(screen)
+    p.move(dt)
+    e.move(dt)
     if p.check_hit(e.x_cord, e.y_cord):
         e.x_cord = random.randint(0, 735)
         e.y_cord = 50
 
-    p.move(dt)
     p.draw(screen)
-    e.move(dt)
     e.draw(screen)
 
     pygame.display.update()

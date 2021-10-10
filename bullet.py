@@ -5,7 +5,7 @@ import math
 class Bullet:
     bullet_img = pygame.image.load('bullet.png')
     base_y = 480
-    bullet_change = 500
+    bullet_change = 550
 
     def __init__(self):
         self.x_cord = 0
@@ -26,7 +26,7 @@ class Bullet:
 
     def check_hit(self, x, y):
         distance = math.sqrt(math.pow(x - self.x_cord, 2) + math.pow(y - self.y_cord, 2))
-        if distance < 27:
+        if distance < 30:
             self.is_ready = True
             self.y_cord = self.base_y
             return True
