@@ -1,6 +1,7 @@
 import pygame
 import random
 import time
+import math
 
 # initialize pygame
 pygame.init()
@@ -26,7 +27,7 @@ last_key_down = 'none'
 
 #  Enemy and starting cord
 EnemyImg = pygame.image.load('trash.png')
-EnemyX = random.randint(0, 800)
+EnemyX = random.randint(0, 735)
 EnemyY = 50
 
 #  Background
@@ -42,6 +43,8 @@ bullet_y = 480
 bullet_change = 500
 bullet_state = "ready"
 
+#@score
+score = 0
 
 def fire_bullet(x, y):
     global bullet_state
@@ -58,6 +61,14 @@ def Player(x, y):
 
 def enemy(x, y):
     screen.blit(EnemyImg, (x, y))
+
+
+def is_collision(enemyX, enemyY, bulletX, bulletY):
+    distance = math.sqrt(math.pow(enemyX - bulletX, 2) + math.pow(enemyY - bulletY, 2))
+    if distance < 27:
+        return True
+    else:
+        return False
 
 
 dt = 0
@@ -124,4 +135,13 @@ while running:
             bullet_state = "ready"
         else:
             fire_bullet(bullet_x, bullet_y)
+    # Collision
+    collision = is_collision(EnemyX, EnemyY, bullet_x, bullet_y)
+    if collision:
+        bullet_y = 480
+        bullet_state = "ready"
+        score += 1
+        EnemyX = random.randint(0, 735)
+        EnemyY = 50
+
     pygame.display.update()
