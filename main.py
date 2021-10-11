@@ -32,13 +32,15 @@ font = pygame.font.Font('freesansbold.ttf', 32)
 text_x = 10
 text_y = 10
 
+e1 = enemy.Enemy(random.randint(0, 735), 50)
+e2 = enemy.Enemy(random.randint(0, 735), 90)
+enemy_list = [e1, e2]
 
 def show_score():
     score = font.render("Score = {}".format(str(score_vale)), True, (255, 255, 255))
     screen.blit(score, (text_x, text_y))
 
 
-e = enemy.Enemy(random.randint(0, 735), 50)
 p = player.Player()
 
 dt = 0
@@ -75,11 +77,14 @@ while running:
     # Background
     screen.blit(background, (0, 0))
     p.move(dt)
-    e.move(dt)
-    if p.check_hit(e.x_cord, e.y_cord):
-        e.x_cord = random.randint(0, 735)
-        e.y_cord = 50
-        score_vale += 1
+
+    for e in enemy_list:
+        e.move(dt)
+        if p.check_hit(e.x_cord, e.y_cord):
+            e.x_cord = random.randint(0, 735)
+            e.y_cord = 50
+            score_vale += 1
+        e.draw(screen)
 
     p.draw(screen)
     e.draw(screen)
