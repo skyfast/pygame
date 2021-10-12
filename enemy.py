@@ -6,7 +6,7 @@ class Enemy:
     # path to image
     EnemyImg = pygame.image.load('trash.png')
     # control how fast the enemy will move, same for all
-    enemy_y_change = 20
+    enemy_y_change = 40
     enemy_x_change = 300
 
     def __init__(self, x, y):

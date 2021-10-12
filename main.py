@@ -1,7 +1,7 @@
 import pygame
 import random
 import time
-import math
+
 
 import enemy
 import player
@@ -34,7 +34,10 @@ text_y = 10
 
 e1 = enemy.Enemy(random.randint(0, 735), 50)
 e2 = enemy.Enemy(random.randint(0, 735), 90)
-enemy_list = [e1, e2]
+e3 = enemy.Enemy(random.randint(0, 735), 90)
+e4 = enemy.Enemy(random.randint(0, 735), 90)
+e5 = enemy.Enemy(random.randint(0, 735), 90)
+enemy_list = [e1, e2, e3, e4, e5]
 
 def show_score():
     score = font.render("Score = {}".format(str(score_vale)), True, (255, 255, 255))
@@ -87,6 +90,5 @@ while running:
         e.draw(screen)
 
     p.draw(screen)
-    e.draw(screen)
     show_score()
     pygame.display.update()

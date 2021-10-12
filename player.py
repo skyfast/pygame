@@ -5,7 +5,7 @@ from bullet import Bullet
 
 class Player:
     PlayerImg = pygame.image.load('player.png')
-    x_change = 400
+    x_change = 500
 
     def __init__(self):
         self.x_cord = 370

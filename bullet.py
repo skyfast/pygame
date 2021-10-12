@@ -5,7 +5,7 @@ import math
 class Bullet:
     bullet_img = pygame.image.load('bullet.png')
     base_y = 480
-    bullet_change = 550
+    bullet_change = 700
 
     def __init__(self):
         self.x_cord = 0
